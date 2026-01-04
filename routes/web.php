@@ -12,6 +12,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\PhotoController;
 use App\Http\Middleware\AdminOnly;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
@@ -41,6 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::resource('projects', ProjectController::class);
     Route::resource('tasks', TaskController::class);
+    Route::post('/upload-chunk', [PhotoController::class, 'store'])->name('upload.chunk');
     Route::middleware([AdminOnly::class])->group(function () {
         Route::resource('users', UserController::class);
         Route::resource('roles', RoleController::class);
